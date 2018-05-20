@@ -9,12 +9,13 @@ class EntryForm extends Model
 {
     public $name;
     public $email;
+    public $contact;
 
     public function rules()
     {
         return [
             [['name', 'email'], 'required'],
-            ['email', 'email'],
+            ['email', 'email'], 
         ];
     }
 }
