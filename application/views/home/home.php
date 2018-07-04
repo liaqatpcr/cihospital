@@ -19,6 +19,7 @@ $this->load->view("partial/header");
 			<a href="<?php echo site_url("$module->module_id");?>"><img src="<?php echo base_url().'public/images/menubar/'.$module->module_id.'.png';?>" border="0" alt="Menubar Image" /></a>
 			<a href="<?php echo site_url("$module->module_id");?>"><?php echo $this->lang->line("module_".$module->module_id) ?></a>
 		</div>
+		
 	<?php
 	}
 	?>

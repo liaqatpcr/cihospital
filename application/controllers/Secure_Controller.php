@@ -54,6 +54,7 @@ class Secure_Controller extends CI_Controller
 			if($module->module_id!='office'){
 				///echo 'xxx:'.$module->module_id.':ddd:';die;
 				$this->lang->load($module->module_id, 'english');
+				//$this->lang->load('messages', 'english');
 			}
 		}
 

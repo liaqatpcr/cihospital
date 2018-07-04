@@ -16,7 +16,6 @@ class Login extends CI_Controller
 			$this->form_validation->set_rules('username', 'lang:login_username', 'required|callback_login_check');
 			if($this->config->item('gcaptcha_enable'))
 			{
-				echo 'sssrrrrr';die;
 				$this->form_validation->set_rules('g-recaptcha-response', 'lang:login_gcaptcha', 'required|callback_gcaptcha_check');
 			}
 

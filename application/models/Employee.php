@@ -307,7 +307,8 @@ class Employee extends Person
 	public function login($username, $password)
 	{
 		$query = $this->db->get_where('employees', array('username' => $username, 'deleted' => 0), 1);
-
+		///echo $this->db->last_query();die;
+		//echo '<Pre>';print_r($query);die;
 		if($query->num_rows() == 1)
 		{
 			$row = $query->row();
