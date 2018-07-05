@@ -10,6 +10,7 @@ class Config extends Secure_Controller
 		$this->load->library('barcode_lib');
 		$this->load->library('sale_lib');
 		$this->lang->load('config', 'english');
+		//$this->lang->load('common', 'english');
 	}
 
 	/*

@@ -1,5 +1,11 @@
 <?php $this->load->view("partial/header"); ?>
 
+<?php
+
+ //echo $this->config->item('lines_per_page'); 
+
+?>
+
 <script type="text/javascript">
 $(document).ready(function()
 {

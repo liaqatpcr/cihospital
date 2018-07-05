@@ -25,7 +25,8 @@ class Appconfig extends CI_Model
 	public function get($key)
 	{
 		$query = $this->db->get_where('app_config', array('key' => $key), 1);
-
+		//echo $this->db->last_query(); bangash
+		
 		if($query->num_rows() == 1)
 		{
 			return $query->row()->value;
