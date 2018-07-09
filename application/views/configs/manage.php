@@ -51,6 +51,7 @@
 
 <div class="tab-content">
 	<div class="tab-pane fade in active" id="info_tab">
+		<!-- all first configeration here-->
 		<?php $this->load->view("configs/info_config"); ?>
 	</div>
 	<div class="tab-pane" id="general_tab">

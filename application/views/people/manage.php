@@ -2,7 +2,7 @@
 
 <?php
 
- //echo $this->config->item('lines_per_page'); 
+//echo 'ccc::'. $this->config->item('lines_per_page'); die;
 
 ?>
 

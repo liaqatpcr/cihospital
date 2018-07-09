@@ -25,7 +25,7 @@ class Appconfig extends CI_Model
 	public function get($key)
 	{
 		$query = $this->db->get_where('app_config', array('key' => $key), 1);
-		//echo $this->db->last_query(); bangash
+		
 		
 		if($query->num_rows() == 1)
 		{
@@ -58,7 +58,6 @@ class Appconfig extends CI_Model
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
-
 		foreach($data as $key=>$value)
 		{
 			$success &= $this->save($key, $value);

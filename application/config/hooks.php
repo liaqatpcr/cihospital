@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/hooks.html
 |
 */
-/*$hook['post_controller_constructor'][] = array(
+$hook['post_controller_constructor'][] = array(
                                     'class'    => '',
                                     'function' => 'load_config',
                                     'filename' => 'load_config.php',
@@ -26,7 +26,7 @@ $hook['post_controller'] = array(
                                     'filepath' => 'hooks'
                                 );
 
-$hook['pre_system'] = function() {
+/*$hook['pre_system'] = function() {
     $config_path = APPPATH . 'config/';
 	try {
 		$dotenv = new Dotenv\Dotenv($config_path);

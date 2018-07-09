@@ -48,7 +48,7 @@ class Config extends Secure_Controller
 				{
 					++$i;
 
-					$basename = 'public/license/' . $fileinfo->getBasename('.version');
+					$basename = 'publi/license/' . $fileinfo->getBasename('.version');
 					$license[$i]['title'] = $this->xss_clean(file_get_contents($basename . '.version', NULL, NULL, 0, 100));
 					
 					$license_text_file = $basename . '.license';
@@ -82,7 +82,7 @@ class Config extends Secure_Controller
 			$license[$i]['title'] = 'Composer Libraries';
 			$license[$i]['text'] = '';
 
-			$file = file_get_contents('public/license/composer.LICENSES');
+			$file = file_get_contents('license/composer.LICENSES');
 			$array = json_decode($file, TRUE);
 
 			foreach($array as $key => $val)
@@ -134,7 +134,7 @@ class Config extends Secure_Controller
 			$license[$i]['title'] = 'JS Plugins';
 			$license[$i]['text'] = '';
 
-			$file = file_get_contents('public/license/bower.LICENSES');
+			$file = file_get_contents('license/bower.LICENSES');
 			$array = json_decode($file, TRUE);
 
 			foreach($array as $key => $val)
@@ -216,13 +216,13 @@ class Config extends Secure_Controller
 
 		// load all the license statements, they are already XSS cleaned in the private function
 
-		$data['licenses'] = $this->_licenses();
+		//$data['licenses'] = $this->_licenses();
 
 		// load all the themes, already XSS cleaned in the private function
 		$data['themes'] = $this->_themes();
 
 		$data['mailchimp'] = array();
-		//echo 'xxx:<pre>';print_r($data);die;
+
 		if($this->_check_encryption())
 		{
 			$data['mailchimp']['api_key'] = $this->encryption->decrypt($this->config->item('mailchimp_api_key'));
@@ -237,7 +237,6 @@ class Config extends Secure_Controller
 		// load mailchimp lists associated to the given api key, already XSS cleaned in the private function
 		$data['mailchimp']['lists'] = $this->_mailchimp();
 
-		//echo 'sss:'.$this->config->item('company');die;
 		$this->load->view("configs/manage", $data);
 	}
 

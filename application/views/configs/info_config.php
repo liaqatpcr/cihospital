@@ -1,4 +1,8 @@
-<?php echo form_open('config/save_info/', array('id' => 'info_config_form', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal')); ?>
+<?php echo form_open('config/save_info/', array('id' => 'info_config_form', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal')); 
+
+echo 'fffff:'.$this->config->item('company');
+
+?>
 	<div id="config_wrapper">
 		<fieldset id="config_info">
 			<div id="required_fields_message"><?php echo $this->lang->line('common_fields_required_message'); ?></div>
@@ -13,7 +17,7 @@
 							'name' => 'company',
 							'id' => 'company',
 							'class' => 'form-control input-sm required',
-							'value'=>$this->config->item('company'))); ?>
+							'value'=> $this->config->item('company'))); ?>
 					</div>
 				</div>
 			</div>
@@ -118,13 +122,12 @@
 						'value'=>$this->config->item('return_policy'))); ?>
 				</div>
 			</div>
-
 			<?php echo form_submit(array(
 				'name' => 'submit_info',
 				'id' => 'submit_info',
 				'value' => $this->lang->line('common_submit'),
-				'class' => 'btn btn-primary btn-sm pull-right')); ?>
-				aaaaa
+				'class' => 'btn btn-primary btn-sm pull-right')); ?>				
+
 		</fieldset>
 	</div>
 <?php echo form_close(); ?>
