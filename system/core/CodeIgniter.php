@@ -57,6 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 	const CI_VERSION = '3.1.9';
 
+
 /*
  * ------------------------------------------------------
  *  Load the framework constants
@@ -226,7 +227,6 @@ if ( ! is_php('5.4'))
 			$CFG->set_item($key, $value);
 		}
 	}
-
 /*
  * ------------------------------------------------------
  * Important charset-related stuff
@@ -288,7 +288,6 @@ if ( ! is_php('5.4'))
 	require_once(BASEPATH.'core/compat/hash.php');
 	require_once(BASEPATH.'core/compat/password.php');
 	require_once(BASEPATH.'core/compat/standard.php');
-
 /*
  * ------------------------------------------------------
  *  Instantiate the UTF-8 class
@@ -376,6 +375,7 @@ if ( ! is_php('5.4'))
 
 	// Set a mark point for benchmarking
 	$BM->mark('loading_time:_base_classes_end');
+
 
 /*
  * ------------------------------------------------------
@@ -505,6 +505,8 @@ if ( ! is_php('5.4'))
  *  Is there a "pre_controller" hook?
  * ------------------------------------------------------
  */
+
+
 	$EXT->call_hook('pre_controller');
 
 /*
@@ -522,13 +524,16 @@ if ( ! is_php('5.4'))
  *  Is there a "post_controller_constructor" hook?
  * ------------------------------------------------------
  */
+
 	$EXT->call_hook('post_controller_constructor');
+	
 
 /*
  * ------------------------------------------------------
  *  Call the requested method
  * ------------------------------------------------------
  */
+
 	call_user_func_array(array(&$CI, $method), $params);
 
 	// Mark a benchmark end point

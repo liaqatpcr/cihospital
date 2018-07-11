@@ -51,7 +51,7 @@ class Secure_Controller extends CI_Controller
 		{
 			$data['allowed_modules'][] = $module;
 
-			if($module->module_id!='office'){
+			if($module->module_id!='office' and $module->module_id!='home'){
 				///echo 'xxx:'.$module->module_id.':ddd:';die;
 				$this->lang->load($module->module_id, 'english');
 				//$this->lang->load('messages', 'english');
