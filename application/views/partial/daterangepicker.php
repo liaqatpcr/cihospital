@@ -1,7 +1,7 @@
 <?php $this->lang->load("calendar"); $this->lang->load("date"); 
 	if(empty($this->config->item('date_or_time_format')))
 	{
-		echo 'xxx:<pre>';print_r($this->config->item('dateformat'));die;
+		
 ?>
 		$('#daterangepicker').css("width","180");
 		var start_date = "<?php echo date('Y-m-d') ?>";
@@ -67,7 +67,7 @@
 				],
 			},
 			"locale": {
-				"format": <?php echo dateformat_momentjs($this->config->item("dateformat"))?>,
+				"format": "<?php echo dateformat_momentjs($this->config->item("dateformat"))?>",
 				"separator": " - ",
 				"applyLabel": "<?php echo $this->lang->line("datepicker_apply"); ?>",
 				"cancelLabel": "<?php echo $this->lang->line("datepicker_cancel"); ?>",
