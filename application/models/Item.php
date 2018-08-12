@@ -949,6 +949,32 @@ class Item extends CI_Model
 		$this->db->where('item_id', $item_id);
 		$this->db->update('items', array('description'=>$item_description));
 	}
+	public function exists_cat_name($giftcard_name)
+	{
+		$this->db->from('category');
+		$this->db->where('category_name', $giftcard_name);
+		if($this->db->get()->num_rows() == 1){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	public function save_category(&$giftcard_data)
+	{
+		//error_log('save:::::');
+		//error_log(print_r($giftcard_data,true));
+		//$this->db->insert('category', $giftcard_data);
+		if($this->db->insert('category', $giftcard_data))
+			{
+				$giftcard_data['cat_id'] = $this->db->insert_id();
+				//error_log($this->db->last_query());
+				return true;
+			}
+			//error_log($this->db->last_query());	
+			return 1;
+		//return $this->db->update('category', $giftcard_data);
+	}
+
 
 }
 ?>

@@ -237,6 +237,16 @@ class Items extends Secure_Controller
 		}
 		$data['suppliers'] = $suppliers;
 		$data['selected_supplier'] = $item_info->supplier_id;
+		/************* category add dropdown bangash***************/
+		$categories = array('' => $this->lang->line('items_none'));
+		foreach($this->Supplier->get_all_cat()->result_array() as $row)
+		{
+			$categories[$this->xss_clean($row['cat_id'])] = $this->xss_clean($row['category_name']);
+		}
+		$data['categories'] = $categories;
+		$data['selected_category'] = $item_info->category;
+		
+		/************* end category bangash***************/
 
 		$customer_sales_tax_support = $this->config->item('customer_sales_tax_support');
 		if($customer_sales_tax_support == '1')
@@ -897,6 +907,54 @@ class Items extends Secure_Controller
 					$item_data = array('pic_filename' => $new_pic_filename);
 					$this->Item->save($item_data, $item->item_id);
 				}
+			}
+		}
+	}
+function addcategory($giftcard_id = -1)
+	{
+		
+		/*$giftcard_info = $this->Giftcard->get_info($giftcard_id);
+		$data['selected_person_name'] = ($giftcard_id > 0 && isset($giftcard_info->person_id)) ? $giftcard_info->first_name . ' ' . $giftcard_info->last_name : '';
+		$data['selected_person_id'] = $giftcard_info->person_id;
+		if($this->config->item('giftcard_number') == "random")
+		{
+			$data['giftcard_number'] = $giftcard_id > 0 ? $giftcard_info->giftcard_number : '';
+		}
+		else
+		{
+			$max_giftnumber = isset($this->Giftcard->get_max_number()->giftcard_number) ? $this->Giftcard->get_max_number()->giftcard_number : 0;
+			$data['giftcard_number'] = $giftcard_id > 0 ? $giftcard_info->giftcard_number : $max_giftnumber + 1;
+		}
+		$data['giftcard_id'] = $giftcard_id;
+		$data['giftcard_value'] = $giftcard_info->value;
+
+		$data = $this->xss_clean($data);*/
+		//echo '<pre>';print_r($data);die;
+		$this->load->view("items/category_add");
+	}
+	function save_cat(){
+		$giftcard_number = $this->input->post('category_name');
+		//$giftcard_number = $this->item->generate_unique_giftcard_name($this->input->post('category_name'));
+		
+		$giftcard_data = array(
+			'category_name' => $giftcard_number,
+			'created_by' => $this->session->userdata('person_id')			
+		);
+		if($this->Item->exists_cat_name($giftcard_number)){
+			echo json_encode(array('success' => FALSE, 'message' => 'Already Exist'));
+		}else{
+
+			if($this->Item->save_category($giftcard_data))
+			{
+				$giftcard_data = $this->xss_clean($giftcard_data);
+
+				//New giftcard
+					echo json_encode(array('success' => TRUE, 'message' => 'successfully saved '.$giftcard_data['cat_id']));
+			}
+			else //failure
+			{
+				$giftcard_data = $this->xss_clean($giftcard_data);
+				echo json_encode(array('success' => FALSE, 'message' => 'issues in save', 'id' => -1));
 			}
 		}
 	}

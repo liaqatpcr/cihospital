@@ -45,6 +45,17 @@ class Supplier extends Person
 
 		return $this->db->get();		
 	}
+	public function get_all_cat($limit_from = 0, $rows = 0)
+	{
+		$this->db->from('category');
+		$this->db->order_by('category_name', 'asc');
+		if($rows > 0)
+		{
+			$this->db->limit($rows, $limit_from);
+		}
+
+		return $this->db->get();		
+	}
 	
 	/*
 	Gets information about a particular supplier
