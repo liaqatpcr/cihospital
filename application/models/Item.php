@@ -116,6 +116,7 @@ class Item extends CI_Model
 			$this->db->select('items.item_id as item_id');
 			$this->db->select('MAX(items.name) as name');
 			$this->db->select('MAX(items.category) as category');
+			$this->db->select('ct.category_name');
 			$this->db->select('MAX(items.supplier_id) as supplier_id');
 			$this->db->select('MAX(items.item_number) as item_number');
 			$this->db->select('MAX(items.description) as description');
@@ -163,6 +164,7 @@ class Item extends CI_Model
 		$this->db->from('items as items');
 		$this->db->join('suppliers as suppliers', 'suppliers.person_id = items.supplier_id', 'left');
 		$this->db->join('inventory as inventory', 'inventory.trans_items = items.item_id');
+		$this->db->join('category as ct', 'ct.cat_id = items.category');
 
 		if($filters['stock_location_id'] > -1)
 		{

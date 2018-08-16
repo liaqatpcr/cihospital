@@ -89,10 +89,9 @@ class Suppliers extends Persons
 		$first_name = $this->xss_clean($this->input->post('first_name'));
 		$last_name = $this->xss_clean($this->input->post('last_name'));
 		$email = $this->xss_clean(strtolower($this->input->post('email')));
-
 		// format first and last name properly
-		$first_name = $this->nameize($first_name);
-		$last_name = $this->nameize($last_name);
+		$first_name = ucwords(strtolower($first_name));
+		$last_name = ucwords(strtolower($last_name));
 
 		$person_data = array(
 			'first_name' => $first_name,
@@ -108,13 +107,13 @@ class Suppliers extends Persons
 			'country' => $this->input->post('country'),
 			'comments' => $this->input->post('comments')
 		);
+		//error_log(print_r($person_data,true));die;
 
 		$supplier_data = array(
 			'company_name' => $this->input->post('company_name'),
 			'agency_name' => $this->input->post('agency_name'),
 			'account_number' => $this->input->post('account_number') == '' ? NULL : $this->input->post('account_number')
 		);
-
 		if($this->Supplier->save_supplier($person_data, $supplier_data, $supplier_id))
 		{
 			$supplier_data = $this->xss_clean($supplier_data);

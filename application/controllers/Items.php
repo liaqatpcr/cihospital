@@ -63,19 +63,20 @@ class Items extends Secure_Controller
 		$filters = array_merge($filters, $filledup);
 
 		$items = $this->Item->search($search, $filters, $limit, $offset, $sort, $order);
-
+		//error_log(print_r($items,true));
 		$total_rows = $this->Item->get_found_rows($search, $filters);
 
 		$data_rows = array();
 		foreach($items->result() as $item)
 		{
+			//echo '<pre>';print_r($item);die;
 			$data_rows[] = $this->xss_clean(get_item_data_row($item));
 			if($item->pic_filename!='')
 			{
 				$this->_update_pic_filename($item);
 			}
 		}
-
+		//error_log(print_r($data_rows,true));
 		echo json_encode(array('total' => $total_rows, 'rows' => $data_rows));
 	}
 	
@@ -400,16 +401,19 @@ class Items extends Secure_Controller
 	public function save($item_id = -1)
 	{
 		$upload_success = $this->_handle_image_upload();
+		//error_log('bbbbbbb:::');
 		$upload_data = $this->upload->data();
-
+		//error_log(print_r($upload_data,true));
+		//error_log('ccccccc:::');
 		$receiving_quantity = parse_decimals($this->input->post('receiving_quantity'));
 		$item_type = $this->input->post('item_type') == NULL ? ITEM : $this->input->post('item_type');
-
+		//error_log('ddddddddddd:::');
 		if($receiving_quantity == '0' && $item_type!= ITEM_TEMP)
 		{
 			$receiving_quantity = '1';
 		}
 		//Save item data
+		//error_log('eeeeeeeee:::');
 		$item_data = array(
 			'name' => $this->input->post('name'),
 			'description' => $this->input->post('description'),
@@ -436,6 +440,7 @@ class Items extends Secure_Controller
 			'custom9' => $this->input->post('custom9') == NULL ? '' : $this->input->post('custom9'),
 			'custom10' => $this->input->post('custom10') == NULL ? '' : $this->input->post('custom10')
 		);
+		//error_log(print_r($item_data,true));die;
 
 		if($item_data['item_type'] == ITEM_TEMP)
 		{
@@ -464,7 +469,7 @@ class Items extends Secure_Controller
 		}
 		
 		$employee_id = $this->Employee->get_logged_in_employee_info()->person_id;
-
+		//error_log('ssss:::');
 		if($this->Item->save($item_data, $item_id))
 		{
 			$success = TRUE;
@@ -545,6 +550,7 @@ class Items extends Secure_Controller
 	
 	public function check_item_number()
 	{
+		error_log(print_r($this->input->post(),true));die;
 		$exists = $this->Item->item_number_exists($this->input->post('item_number'), $this->input->post('item_id'));
 		echo !$exists ? 'true' : 'false';
 	}

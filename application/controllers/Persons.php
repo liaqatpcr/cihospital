@@ -49,6 +49,10 @@ abstract class Persons extends Secure_Controller
 
 	protected function nameize($string)
 	{
+		error_log($string);
+		error_log('::::');
+		error_log(str_name_case($string));
+		error_log('---');
 		return str_name_case($string);
 	}
 }
